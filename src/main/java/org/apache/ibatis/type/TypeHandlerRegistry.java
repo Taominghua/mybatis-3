@@ -246,7 +246,11 @@ public final class TypeHandlerRegistry {
       if (clazz.isEnum()) {
         jdbcHandlerMap = getJdbcHandlerMapForEnumInterfaces(clazz, clazz);
         if (jdbcHandlerMap == null) {
-          register(clazz, getInstance(clazz, defaultEnumTypeHandler));
+          try {
+            this.register(clazz.getName(), "com.enterprise.data.type.DBEnumTypeHandler");
+          } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+          }
           return TYPE_HANDLER_MAP.get(clazz);
         }
       } else {
