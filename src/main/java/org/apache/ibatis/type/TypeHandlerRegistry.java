@@ -247,6 +247,7 @@ public final class TypeHandlerRegistry {
         jdbcHandlerMap = getJdbcHandlerMapForEnumInterfaces(clazz, clazz);
         if (jdbcHandlerMap == null) {
           try {
+            //ref https://github.com/mybatis/mybatis-3/issues/970
             this.register(clazz.getName(), "com.enterprise.data.type.DBEnumTypeHandler");
           } catch (ClassNotFoundException e) {
             e.printStackTrace();
